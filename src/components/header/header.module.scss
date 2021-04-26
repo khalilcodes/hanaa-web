@@ -1,0 +1,153 @@
+@import '../../styles/mixins.scss';
+
+header {
+  @media (min-width: 512px) {
+    position: absolute;
+  }
+  
+  height: 4rem;
+  
+  position: relative;
+  z-index: 10;
+  width: 100%;
+
+  font-family: var(--abril-font);
+  
+  a {
+    text-decoration: none;
+    color: var(--theme-charcoal);
+  }
+
+
+  .container {
+    display: grid;
+    grid-template-columns: auto;
+    grid-auto-flow: column;
+
+    align-items: center;
+    height: 100%;
+
+    @media (min-width: 512px) {
+      margin: 0 5rem;
+    }
+    
+    margin: 0 2rem;
+
+    div {
+      text-transform: lowercase;
+
+      @include fluid-type(18, 22, 320, 512);
+      @include fluid-type(16, 32, 512, 2560);
+
+      a {
+        line-height: 10px;
+        width: fit-content;
+      }
+
+    }
+
+    .nav-desktop, .nav-mobile {
+      a:first-child {
+          text-decoration: underline;
+          font-weight: normal;
+          font-style: italic;
+    
+          @include fluid-type(14, 18, 320, 512);
+          @include fluid-type(14, 24, 512, 2560);
+        }
+    }
+    
+    .nav-desktop {
+      @media (min-width: 968px) {
+        position: relative;
+        display: grid;
+        grid-template-columns: auto;
+        grid-auto-flow: column;
+
+        justify-content: right;
+        text-align: right;
+      
+        a:not(:last-child) {
+          margin-right: 2rem;
+        }
+      }
+    }
+
+    .nav-mobile {
+      position: absolute;
+      display: grid;
+      gap: 2rem;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 4.5rem 2rem 2rem;
+      transform: translateY(-100%);
+      background: var(--theme-charcoal);
+      z-index: -1;
+
+      @media (min-width: 512px) {
+        padding: 4.5rem 5rem 2rem;
+      }
+    }
+
+    .menu-bar {
+      position: relative;
+      width: 30px;
+      height: 18px;
+      border: none;
+      background: none;
+      outline: none;
+      justify-self: right;
+      padding: 0;
+
+      @media (min-width: 968px) {
+        display: none;
+      }
+
+      // background: yellow;
+      
+      display: grid;
+      grid-auto-flow: row;
+      align-items: center;
+
+      span {
+        width: 100%;
+        height: 2px;
+        background: var(--theme-charcoal);
+      }
+    }
+  }
+}
+
+
+.work-page-header {
+    @media (min-width: 512px) {
+      position: relative;
+    }
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 4rem;
+    @include content-center();
+
+    .title-styles {
+      font-family: var(--abril-font);
+      text-transform: uppercase;
+      text-align: center;
+      color: var(--color-theme-black);
+      
+      @include fluid-type(18, 22, 320, 512);
+      @include fluid-type(16, 32, 512, 2560);
+    }
+
+    span {
+      position: absolute;
+      top: 4rem;
+      height: 1rem;
+      width: 100%;
+
+      background-image: url('../../images/selectedWorks/three-lines.png');
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+    }
+}

@@ -1,0 +1,113 @@
+@import '../../styles/mixins.scss';
+
+$hidden: 9999px 0 0 -2px var(--theme-charcoal);
+$scaled: 9999px 0 0 0px var(--theme-charcoal);
+
+@keyframes dotPulse {
+  0% {
+    box-shadow: $hidden;
+  }
+  30% {
+    box-shadow: $scaled;
+  }
+  60%,
+  100% {
+    box-shadow: $hidden;
+  }
+}
+
+.contact-form {
+    margin: 0 8vw;
+
+    @media (min-width: 512px) and (max-width: 1023px) {
+        margin: 0 14vw;
+    }
+
+    @include fluid-type(14, 18, 320, 512);
+    @include fluid-type(12, 28, 512, 2560);
+
+    form {
+        position: relative;
+        display: grid;
+        grid-template-rows: auto;
+        gap: 20px;
+
+        label, input, textarea {
+            font-family: var(--playfair-font);
+        }
+        label {
+            color: rgba($color: #000000, $alpha: 0.54);
+        }
+        ::after {
+            border-bottom: 2px solid black;
+        }
+        textarea {
+            line-height: initial;
+        }
+
+        button {
+            .button-text {
+                color: blue;
+            }
+
+            margin-top: 10px;
+            font-family: var(--playfair-font);
+
+            border-radius: 0;
+            transition: all 0.3s ease-out;
+
+            &:hover {
+                background: var(--text-color-black);
+                color: white;
+            }
+
+            .dots-wrapper {
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
+
+                div {
+                    position: relative;
+                    width: 8px;
+                    height: 8px;
+                    border-radius: 4px;
+                    background: var(--theme-charcoal);
+                    left: -9999px;
+                    box-shadow: $hidden;
+                    animation: dotPulse 1s infinite linear;
+                    animation-delay: .25s;
+    
+                    &::before, &::after {
+                        @extend div;
+                        content: '';
+                        position: absolute;
+                    }
+    
+                    &::before {
+                        left: -20px;
+                        animation-delay: 0s;
+                    }
+    
+                    &::after {
+                        left: 20px;
+                        border: none;
+                        animation-delay: .5s;
+                    }
+                }
+            }
+
+            .message-style {
+                position: absolute;
+                color: darkgreen;
+                width: 100%;
+                left: 50%;
+                bottom: -10px;
+                z-index: -1;
+                transform: translate(-50%, 0);
+                opacity: 0;
+                font-weight: bold;
+            }
+        }
+    }
+}
+

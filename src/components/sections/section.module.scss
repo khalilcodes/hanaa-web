@@ -1,0 +1,29 @@
+@import '../../styles/mixins.scss';
+
+.container {
+    position: relative;
+    margin: 0 2.5rem;
+
+    @media (min-width: 968px) {
+        margin: 0 8rem;
+    }
+
+    .title-style {
+        display: flex;
+        align-items: center;
+        margin: 2rem 0;
+
+        font-family: var(--abril-font);
+
+        @include fluid-type(11, 14, 320, 512);
+        @include fluid-type(11, 16, 512, 2560);
+
+        justify-content: center;
+        text-align: center;
+
+        @media (min-width: 968px ) {
+            justify-content: flex-start;
+            text-align: start;
+        }
+    }
+}

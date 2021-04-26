@@ -1,0 +1,51 @@
+@import '../../styles/mixins.scss';
+
+.banner-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.banner-title {
+    overflow: hidden;
+    font-family: var(--playfair-font);
+    font-weight: 800;
+
+    display: flex;
+    flex-direction: column;
+
+    @media (min-width: 512px) {
+        flex-direction: row;
+    }
+
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    @include fluid-type(26, 42, 320, 512);
+    @include fluid-type(16, 60, 512, 2560);
+    
+    @media (min-width: 512px) {
+        top: 32%;
+        left: 55%;
+        position: absolute;
+        transform: translate(-50%, -50%);
+        margin: 0;
+    }
+
+    text-align: center;
+
+    position: relative;
+    margin: 2rem 0;
+    
+    opacity: 0;
+    
+    span {
+        margin: 0 5px;
+    }
+}
+
+.hero-image {
+    width: 100%;
+}

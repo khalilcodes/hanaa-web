@@ -1,0 +1,33 @@
+@import '../../styles/mixins.scss';
+
+.styles-logo {
+  position: absolute;
+  padding: 0.8rem 0;
+  height: 4rem;
+  width: 100%;
+  left: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--abril-font);
+  text-transform: lowercase;
+  background: var(--color-theme-black);
+  
+  a {
+    @include fluid-type(16, 24, 512, 2560);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.styles-bottom {
+  left: unset;
+  right: 0;
+  bottom: 0;
+}

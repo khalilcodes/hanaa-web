@@ -1,0 +1,123 @@
+@import '../../styles/mixins.scss';
+
+.container {
+    margin: 0;
+
+    //section-title-style
+    div:nth-of-type(1) {
+        margin-bottom: 0;
+    }
+
+    font-family: var(--playfair-font);
+    font-weight: bold;
+
+    @include fluid-type(16, 20, 320, 512);
+    @include fluid-type(16, 24, 512, 2560);
+
+    .grid {
+        min-height: 5rem;
+    }
+
+    h1 {
+        margin: .8rem 0;
+        padding: .8rem 4rem;
+        @media (min-width: 968px) {
+            padding: 0.8rem 8rem;
+        }
+    }
+    .contact-container {
+        position: relative;
+        display: grid;
+        margin: 1rem 0;
+        gap: 1rem;
+        
+        @media (min-width: 1024px) {
+            grid-template-columns: repeat(2, 1fr);
+
+            &::after {
+                content: "";
+                position: absolute;
+                height: 100%;
+                width: 1px;
+                background: #727272;
+                left: 50%;
+                top: 0;
+                transform: translateX(-50%);
+            }
+
+            .form-container {
+                margin-left: 2.5rem;
+            }
+        }
+        
+        .contact-info {
+            position: relative;
+            display: flex;
+
+            @media (min-width: 1024px) {
+                margin-right: 2.5rem;
+            }
+    
+            .contact-info-links {
+                display: flex;
+                flex-direction: column;
+                width: fit-content;
+                height: fit-content;
+                margin: auto;
+                z-index: 1;
+            
+                span {
+                    margin: 1rem 0;
+                    text-align: center;
+    
+                    @media (min-width: 1024px) {
+                        width: fit-content;
+                    }
+    
+                    a {
+                        position: relative;
+    
+                        &:after {
+                            content: '';
+                            position: absolute;
+                            height: 2px;
+                            width: 0;
+                            display: block;
+                            margin-top: 5px;
+                            right: 0;
+                            background: black;
+                            transition: .4s ease;
+                        }
+    
+                        &:hover {
+                            &:after {
+                                width: 100%;
+                                left: 0;
+                                background: black;
+                            }
+                        }
+                    }
+                }
+            }
+    
+            .hover-image-style {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                z-index: 0;
+        
+                img {
+                    border: 1px solid black;
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 200px;
+                    opacity: 0;
+                    pointer-events: none;
+                }
+            }
+        }
+    }
+}

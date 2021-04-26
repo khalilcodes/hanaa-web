@@ -1,0 +1,33 @@
+@import '../styles/mixins.scss';
+
+.container {
+    display: flex;
+    height: calc(100vh - 4rem);
+    color: var(--theme-charcoal);
+    
+    .grid-wrapper {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        margin: auto;
+        
+        .text-content {
+            @include content-center();
+            margin: auto;
+            flex-direction: column;
+            gap: 20px;
+
+            .four-zero-four {
+                display: flex;
+                font-family: var(--abril-font);
+                @include fluid-type(100, 180, 512, 2560);
+            }
+
+            .description {
+                font-family: var(--playfair-font);
+                @include fluid-type(14, 24, 512, 2560);
+                max-width: 300px;
+                text-align: center;
+            }
+        }
+    }    
+}

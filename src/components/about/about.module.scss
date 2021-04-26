@@ -1,0 +1,35 @@
+@import '../../styles/mixins.scss';
+
+.about-container {
+
+    overflow: hidden;
+
+    text-align: center;
+    width: fit-content;
+    margin: 0 3rem;
+    font-family: var(--playfair-font);
+    display: flex;
+    
+    @include fluid-type(14, 18, 320, 512);
+    @include fluid-type(12, 28, 512, 2560);
+
+    @media (min-width: 512px) {
+        position: absolute;
+        bottom: 5%;
+        left: 15%;
+        text-align: start;
+        transform: translateX(0);
+        width: 30vw;
+        margin: 0;
+
+        @media (min-width: 768px) {
+            bottom: 15%;
+        }
+    }
+
+    div {
+        margin: auto 0;
+        opacity: 0;
+    }
+
+}

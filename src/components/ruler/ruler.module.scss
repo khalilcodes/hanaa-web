@@ -1,0 +1,85 @@
+.container {
+    position: absolute;
+    top: 0;
+    // right: 0;
+    width: 1.8rem;
+    height: 100%;
+
+    @media (min-width: 1600px) {
+        width: 2.2rem;
+    }
+
+    .ruler {
+        position: relative;
+        width: 100%;
+        height: 100%;
+
+        .mouse-line {
+            position: absolute;
+            float: left;
+            width: 100%;
+            height: 2px;
+            background: black;
+        }
+
+        .measure {
+            $line-thickness: 1px;
+            $line-color: #000;
+
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            // right: 0;
+            top: 0;
+            background: 
+                repeating-linear-gradient(
+                    0deg, $line-color, $line-color 1px, 
+                    transparent $line-thickness,
+                    transparent 70px
+                    );
+            background-attachment: fixed;
+            
+            &::before {
+                content: '';
+                position: absolute;
+                width: 40%;
+                height: 100%;
+                background: 
+                    repeating-linear-gradient(
+                        0deg, $line-color, $line-color 1px,
+                        transparent $line-thickness,
+                        transparent 7px
+                    );
+                background-attachment: fixed;
+            }
+
+            &::after {
+                content: '';
+                position: absolute;
+                width: 60%;
+                height: 100%;
+                background: 
+                    repeating-linear-gradient(
+                        0deg, $line-color, $line-color 1px,
+                        transparent $line-thickness,
+                        transparent 35px
+                    );
+                background-attachment: fixed;
+            }
+        }
+    }
+}
+
+.styles-right {
+    .ruler {
+        .mouse-line {
+            display: none;
+        }
+        .measure::before {
+            right: 0;
+        }
+        .measure::after {
+            right: 0;
+        }
+    }
+}

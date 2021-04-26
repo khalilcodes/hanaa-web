@@ -1,0 +1,20 @@
+@mixin fluid-type($font-min, $font-max, $screen-min, $screen-max) {
+  font-size: #{$font-min}px;
+
+  @media only screen and (min-width: #{$screen-min}px) {
+    font-size: calc(
+      #{$font-min}px + #{($font-max - $font-min)} * (100vw - #{$screen-min}px) / (#{$screen-max} - #{$screen-min})
+    );
+  }
+
+  @media only screen and (min-width: #{$screen-max}px) {
+    font-size: #{$font-max}px;
+  }
+}
+
+@mixin content-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
