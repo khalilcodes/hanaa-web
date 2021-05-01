@@ -55,9 +55,9 @@ const Contact = ({ heading }) => {
     []
   )
 
-  const mouse = React.useMemo(() => { return { x: position.x, y: position.y }},[position.x, position.y])
-
   useEffect(() => {
+    const mouse = { x: position.x, y: position.y }
+
     let imageElement = hoverImage
     animation.to(imageElement.current, {
       opacity: 0.5,
@@ -89,7 +89,7 @@ const Contact = ({ heading }) => {
     window.addEventListener("mousemove", e => handleMousemove(e))
     return () =>
       window.removeEventListener("mousemove", e => handleMousemove(e))
-  }, [animation, hoverImage, mouse, position])
+  }, [animation, hoverImage, position])
 
   const handleEnter = imgSrc => {
     if (image) {
