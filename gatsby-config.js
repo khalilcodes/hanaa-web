@@ -10,6 +10,7 @@ module.exports = {
     title: "hanaa",
     description: `Hey there. Click this link to view my online portfolio.`,
     author: `@khalill`,
+    siteUrl: process.env.GATSBY_SITE_URL,
   },
   plugins: [
     "gatsby-plugin-sass",
