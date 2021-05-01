@@ -116,6 +116,7 @@ const Form = () => {
               <p 
                 style={{
                   margin: 0,
+                  fontSize: "small",
                   color: status.color
                 }}
               >
