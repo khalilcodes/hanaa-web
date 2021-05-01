@@ -45,11 +45,13 @@ const Contact = ({ heading }) => {
   const [image, setImage] = useState(null)
   const [animation] = useState(gsap.timeline({ paused: true }))
 
-  const position = React.useMemo(() => { 
-    return {
-      x: window.innerWidth / 2,
-      y: window.innerHeight / 2,
-    }},
+  const position = React.useMemo(() => {
+    if (typeof window !== "undefined") {
+      return {
+        x: window.innerWidth / 2,
+        y: window.innerHeight / 2,
+      }}
+    }, 
     []
   )
 
