@@ -8,6 +8,7 @@
     width: fit-content;
     margin: 0 3rem;
     font-family: var(--playfair-font);
+    line-height: 21px;
     display: flex;
     
     @include fluid-type(14, 18, 320, 512);

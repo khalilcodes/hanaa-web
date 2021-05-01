@@ -1,19 +1,5 @@
-@import '../styles/mixins.scss';
-@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
-
 :root {
   --theme-charcoal: #454e57;
-  --theme-gray: #9E90A2;
-  --theme-cream: #FAF3DD;
-  --theme-burgundy: #A30B37;
-  --theme-text: #202a34;
-  --theme-maroon: #902923;
-  --theme-yellow: #FF8C42;
-
-
-  --text-color-black: #202a34;
-  --gray-line-color: #D1D1D1;
-  --color-theme-black: #454e57;
   --abril-font: 'Abril Fatface';
   --playfair-font: 'Playfair Display';
 }
@@ -32,7 +18,7 @@ html, body {
 
   display: block;
   line-height: 1;
-  color: var(--color-theme-black);
+  color: var(--theme-charcoal);
   box-sizing: border-box;
   overscroll-behavior-y: none;
   // -ms-overflow-style: none;

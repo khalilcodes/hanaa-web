@@ -1,7 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react'
-import { gsap } from 'gsap'
-
-// import { useStaticQuery, graphql } from 'gatsby'
+import React, { useState } from 'react'
 
 import useForm from './useForm'
 import FormValidation from './FormValidation'
@@ -9,7 +6,7 @@ import FormValidation from './FormValidation'
 import { TextField, Button } from "@material-ui/core"
 import { StylesProvider, makeStyles } from '@material-ui/core/styles'
 
-import { contactForm, dotsWrapper, messageStyle } from './form.module.scss'
+import { contactForm, dotsWrapper } from './form.module.scss'
 import './form.module.scss'
 
 const useStyles = makeStyles(() => ({
@@ -25,76 +22,61 @@ const useStyles = makeStyles(() => ({
 }))
 
 const Form = () => {
-    // const { data } = useStaticQuery(graphql`
-    //   query {
-    //     data: strapiGlobal {
-    //       contactEmail
-    //     }
-    //   }
-    // `)
+    let contactFormName = "contact form v1.0"
 
-    const [ statusMessage, setStatusMessage ] = useState(null)
-    let statusMessageRef = useRef()
-    const [ tl ] = useState(gsap.timeline())
+    const [ status, setStatus ] = useState({
+      message: null,
+      color: ""
+    })
 
-    const handleSubmit = () => {
-      setStatusMessage("test message")
-      setTimeout(() => {
+    const handleSubmit = async () => {
+
+      function clearSubmit() {
         setIsSubmiting(false)
-        setStatusMessage(null)
-      }, 3000)
-      // const form = document.getElementById('contact-form')
-      // const data = new FormData(form)
+        setTimeout(() => {
+          setStatus({ ...status, message: null })
+        }, 3000);
+        setValues({})
+      }
 
-      // try {
-      //   await fetch(
-      //     "https://kwes.io/api/foreign/forms/hQe0LBouiTQIBgOajzXv",
-      //     // "https://formsubmit.co/ajax/d1b8bc57fbe900df643cff6a2a124d9e",
-      //     {
-      //       method: "POST",
-      //     //   mode: "no-cors",
-      //     //   body: data,
-      //     }
-      //   ).then(res => {
-      //     console.log(res)
-      //     setIsSubmiting(false)
-      //     if (res.status < 300) {
-      //       setMessage("Your message has been sent! Thank you.")
-      //     } else {
-      //       setMessage("Sorry, an error has occured.")
-      //     }
-
-      //     setTimeout(() => {
-      //       setMessage(null)
-      //     }, 5000)
-      //   })
-      // } catch(error) {
-      //   setMessage(error.message)
-      // }
+      function encode(data) {
+        return Object.keys(data)
+          .map(
+            key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key])
+          )
+          .join("&")
+      }
+      
+      try {
+        await fetch("/", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+          },
+          body: encode({ "form-name": contactFormName, ...values })
+        }).then(() => {
+          setStatus({ color: "darkgreen", message: "Thank you! Your message has been sent." })
+        }).finally(() => clearSubmit())
+      } catch (err) {
+        setStatus({ color: "darkred", message: "some error occurred." })
+        clearSubmit()
+      }
     }
 
-    useEffect(() => {
-      tl.to(statusMessageRef, {
-        opacity: 1,
-        y: 20
-      })
-    },[])
-
-    useEffect(() => {
-      tl.reversed(statusMessage === null)
-    },[statusMessage])
-
-    const { values, handleChange, onSubmit, errors, setIsSubmiting, isSubmitting } = useForm(handleSubmit, FormValidation)
+    const { values, setValues, handleChange, onSubmit, errors, setIsSubmiting, isSubmitting } = useForm(handleSubmit, FormValidation)
 
     const classes = useStyles()
 
     return (
       <div className={contactForm}>
         <form
-          className={`${classes.root} kwes-form`}
+          encType="application/x-www-form-urlencoded"
+          className={classes.root}
           id="contact-form"
+          name={contactFormName}
           onSubmit={onSubmit}
           noValidate
+          data-netlify={true}
         >
           <StylesProvider injectFirst>
             <TextField
@@ -129,10 +111,17 @@ const Form = () => {
                   <div />
                 </span>
               )}
-              <span className={messageStyle} ref={el => (statusMessageRef = el)}>
-                {statusMessage}
-              </span>
             </Button>
+            {status.message !== null && 
+              <p 
+                style={{
+                  margin: 0,
+                  color: status.color
+                }}
+              >
+                {status.message}
+              </p>
+            }
           </StylesProvider>
         </form>
       </div>

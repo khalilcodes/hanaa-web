@@ -1,25 +1,29 @@
 import React from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
+import { renderRichText } from 'gatsby-source-contentful/rich-text'
+
 import { aboutContainer } from './about.module.scss'
 
 const About = () => {
-    const { contentfulHome: {
-      bio: { bio }
-    }} = useStaticQuery(graphql`
+    const {
+      contentfulHome: { bio },
+    } = useStaticQuery(graphql`
       query {
         contentfulHome {
           bio {
-            bio
+            raw
           }
         }
       }
     `)
 
+    const aboutDescription = renderRichText(bio)
+
     return (
       <>
         <div className={aboutContainer}>
           <div className="about-text">
-            {bio}
+            {aboutDescription}
           </div>
         </div>
       </>

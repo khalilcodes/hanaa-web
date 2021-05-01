@@ -46,9 +46,6 @@ $scaled: 9999px 0 0 0px var(--theme-charcoal);
         }
 
         button {
-            .button-text {
-                color: blue;
-            }
 
             margin-top: 10px;
             font-family: var(--playfair-font);
@@ -57,7 +54,7 @@ $scaled: 9999px 0 0 0px var(--theme-charcoal);
             transition: all 0.3s ease-out;
 
             &:hover {
-                background: var(--text-color-black);
+                background: var(--theme-charcoal);
                 color: white;
             }
 
@@ -94,18 +91,6 @@ $scaled: 9999px 0 0 0px var(--theme-charcoal);
                         animation-delay: .5s;
                     }
                 }
-            }
-
-            .message-style {
-                position: absolute;
-                color: darkgreen;
-                width: 100%;
-                left: 50%;
-                bottom: -10px;
-                z-index: -1;
-                transform: translate(-50%, 0);
-                opacity: 0;
-                font-weight: bold;
             }
         }
     }

@@ -11,7 +11,7 @@ const useForm = (callback, validate) => {
         } else {
             setIsSubmiting(false)
         }
-    },[isSubmitting])
+    },[isSubmitting, errors, callback])
 
     const handleChange = (e) => {
         e.persist()
@@ -22,7 +22,7 @@ const useForm = (callback, validate) => {
         setErrors(validate(values))
         setIsSubmiting(true)
     }
-    return { values, handleChange, onSubmit, errors, setIsSubmiting, isSubmitting }
+    return { values, setValues, handleChange, onSubmit, errors, setIsSubmiting, isSubmitting }
 }
 
 export default useForm

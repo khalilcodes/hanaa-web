@@ -40,7 +40,7 @@ const NotFoundPage = () => {
       delay: 0.5,
       onComplete: () => numberRef.current.textContent = originalText
     }, "0.1")
-  },[])
+  },[tl])
 
   return (
     <>

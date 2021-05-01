@@ -15,9 +15,9 @@ const Logo = ({ bottom }) => {
   
   const [tl] = React.useState(new TimelineLite({ paused: true }))
 
-  const resizeObserver = new ResizeObserver(() => {
+  const resizeObserver = React.useMemo(() => new ResizeObserver(() => {
     ScrollTrigger.refresh()
-  })
+  }),[])
 
   useEffect(() => {
     let logo = logoRef
@@ -36,7 +36,7 @@ const Logo = ({ bottom }) => {
     })
 
     resizeObserver.observe(document.body)
-  },[])
+  },[bottom, tl, resizeObserver])
 
   const position = bottom ? stylesBottom : ""
 

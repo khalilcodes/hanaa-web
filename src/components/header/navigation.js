@@ -26,7 +26,8 @@ const NavigationLinks = ({ breakpoint }) => {
                 y: e.target.hash,
                 offsetY: 0,
               },
-              ease: "power4.inOut",
+              ease: "power4",
+              duration: 2.5
             })
           }
         }
@@ -37,11 +38,17 @@ const NavigationLinks = ({ breakpoint }) => {
       link.addEventListener("click", handleClick)
       return () => link.removeEventListener("click", handleClick)
     })
-  }, [breakpoint, showMenu])
+  }, [breakpoint, showMenu, dispatch])
 
   return (
     <div className={breakpoint ? navMobile : navDesktop} ref={navRef}>
-      <a href={process.env.GATSBY_GDOCS_PDF_ID}>my resume</a>
+      <a
+        href={process.env.GATSBY_GDOCS_PDF}
+        target="_blank"
+        rel="noreferrer noopener"
+      >
+        my resume
+      </a>
       <Link to="/#contact">contact</Link>
     </div>
   )

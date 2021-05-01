@@ -40,30 +40,20 @@ const Contact = ({ heading }) => {
     }
   `)
 
-  // const submitForm = async (e) => {
-  //   e.preventDefault()
-
-  // const form = e.target
-  // const data = new FormData(form)
-
-  // fetch(form.action, {
-  //   method: form.method,
-  //   mode: 'no-cors',
-  //   body: data
-  // })
-  // }
-
   let hoverImage = useRef()
 
   const [image, setImage] = useState(null)
   const [animation] = useState(gsap.timeline({ paused: true }))
 
-  const position = {
-    x: window.innerWidth / 2,
-    y: window.innerHeight / 2,
-  }
+  const position = React.useMemo(() => { 
+    return {
+      x: window.innerWidth / 2,
+      y: window.innerHeight / 2,
+    }},
+    []
+  )
 
-  const mouse = { x: position.x, y: position.y }
+  const mouse = React.useMemo(() => { return { x: position.x, y: position.y }},[position.x, position.y])
 
   useEffect(() => {
     let imageElement = hoverImage
@@ -97,7 +87,7 @@ const Contact = ({ heading }) => {
     window.addEventListener("mousemove", e => handleMousemove(e))
     return () =>
       window.removeEventListener("mousemove", e => handleMousemove(e))
-  }, [animation, hoverImage])
+  }, [animation, hoverImage, mouse, position])
 
   const handleEnter = imgSrc => {
     if (image) {
