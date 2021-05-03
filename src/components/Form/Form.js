@@ -46,8 +46,6 @@ const Form = () => {
     }
 
     const handleSubmit = async () => {
-      
-      console.log(values)
 
       try {
         await fetch("/", {
