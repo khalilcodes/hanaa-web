@@ -58,6 +58,7 @@ header {
     }
     
     .nav-desktop {
+      display: none;
       @media (min-width: 968px) {
         position: relative;
         display: grid;
@@ -103,8 +104,6 @@ header {
       @media (min-width: 968px) {
         display: none;
       }
-
-      // background: yellow;
       
       display: grid;
       grid-auto-flow: row;

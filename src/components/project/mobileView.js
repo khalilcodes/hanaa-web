@@ -41,6 +41,7 @@ const MobileView = ({ images, onClick }) => {
           className={stylesImage}
           onClick={() => onClick(i)}
           onKeyDown={() => onClick(i)}
+          onDragStart={e => e.preventDefault()}
           role="button"
           tabIndex="0"
         >

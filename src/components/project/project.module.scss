@@ -70,6 +70,12 @@
                 overflow: hidden;
             }
 
+            @if touch-action == pan-x {
+                touch-action: pan-x;
+            } @else {
+                touch-action: pan-y;
+            }
+
             position: absolute;
             left:0;
             top: 0;

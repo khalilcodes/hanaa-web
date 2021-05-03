@@ -29,24 +29,26 @@ const Form = () => {
       color: ""
     })
 
+    function clearSubmit() {
+      setIsSubmiting(false)
+      setTimeout(() => {
+        setStatus({ ...status, message: null })
+      }, 5000)
+      setValues({})
+    }
+
+    function encode(data) {
+      return Object.keys(data)
+        .map(
+          key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key])
+        )
+        .join("&")
+    }
+
     const handleSubmit = async () => {
-
-      function clearSubmit() {
-        setIsSubmiting(false)
-        setTimeout(() => {
-          setStatus({ ...status, message: null })
-        }, 3000);
-        setValues({})
-      }
-
-      function encode(data) {
-        return Object.keys(data)
-          .map(
-            key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key])
-          )
-          .join("&")
-      }
       
+      console.log(values)
+
       try {
         await fetch("/", {
           method: "POST",
@@ -63,7 +65,15 @@ const Form = () => {
       }
     }
 
-    const { values, setValues, handleChange, onSubmit, errors, setIsSubmiting, isSubmitting } = useForm(handleSubmit, FormValidation)
+    const {
+      values,
+      setValues,
+      handleChange,
+      onSubmit,
+      errors,
+      isSubmitting,
+      setIsSubmiting,
+    } = useForm(handleSubmit, FormValidation)
 
     const classes = useStyles()
 
@@ -77,8 +87,12 @@ const Form = () => {
           onSubmit={onSubmit}
           noValidate
           data-netlify={true}
+          data-netlify-honeypot="bot-field"
         >
           <StylesProvider injectFirst>
+            <div hidden>
+              <input name="bot-field" />
+            </div>
             <TextField
               label="Name"
               name="name"
@@ -105,24 +119,26 @@ const Form = () => {
               autoComplete="none"
             />
             <Button variant="outlined" type="submit" disabled={isSubmitting}>
-              <span style={{ opacity: isSubmitting ? "0" : "1" }}>Submit</span>
+              <span style={{ opacity: isSubmitting ? "0" : "1" }}>
+                Submit
+              </span>
               {isSubmitting && (
                 <span className={dotsWrapper}>
                   <div />
                 </span>
               )}
             </Button>
-            {status.message !== null && 
-              <p 
+            {status.message !== null && (
+              <p
                 style={{
                   margin: 0,
                   fontSize: "small",
-                  color: status.color
+                  color: status.color,
                 }}
               >
                 {status.message}
               </p>
-            }
+            )}
           </StylesProvider>
         </form>
       </div>
