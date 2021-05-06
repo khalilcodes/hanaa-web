@@ -10,9 +10,7 @@ export const PageTransitions = ({ children, location }) => {
     let breakpoint = width < 1024
 
     useEffect(() => {
-        const noScroll = () => {
-            window.scrollTo(0,0)
-        }
+        const noScroll = () => window.scrollTo(0,0)
 
         window.onpopstate = () => {
             window.addEventListener('scroll', noScroll)
@@ -62,12 +60,11 @@ export const PageTransitions = ({ children, location }) => {
           .from(page, {
             autoAlpha: 0,
           })
-          // },">-1")
 
         if (!breakpoint) {
           const { left, right } = getNode(node)
-          const tween = gsap.from([left, right], {
-            x: gsap.utils.wrap([-left.clientWidth, right.clientWidth]),
+          const tween = gsap.to([left, right], {
+            x: gsap.utils.wrap([0, 0]),
             delay: 1,
           })
           tl.add(tween, "<")

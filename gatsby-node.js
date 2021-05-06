@@ -1,5 +1,3 @@
-const path = require('path')
-
 exports.createPages = async ({ actions, graphql, reporter }) => {
   const { createPage } = actions
 
@@ -20,7 +18,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   }
 
   const works = result.data.works.nodes
-  const workPageTemplate = require.resolve('./src/templates/work-page-template')
+  const workPageTemplate = require.resolve('./src/templates/work-page-template.js')
 
   works.forEach(({ slug }) => {
       createPage({

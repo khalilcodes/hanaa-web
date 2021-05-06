@@ -1,6 +1,5 @@
 import React from "react"
-import { graphql } from "gatsby"
-import { navigate } from "@reach/router"
+import { graphql, navigate } from "gatsby"
 import { GatsbyImage } from "gatsby-plugin-image"
 import { SEO as SeO } from "../components"
 import { WorkPageHeader } from '../components/header'
@@ -16,12 +15,20 @@ import {
   centerGridItem,
 } from "./selected-work.module.scss"
 
-const WorkPageTemplate = ({ data }) => {
+const WorkPageTemplate = ({ data, location }) => {
   const {
     title,
     description: { description },
     images,
   } = data.contentfulWorks
+
+  const handleBackLink = () => {
+    if (typeof window !== "undefined" && location) {
+      navigate(
+        location.state !== null ? -1 : "/#selected-works"
+      )
+    }
+  }
     
   return (
     <>
@@ -29,7 +36,7 @@ const WorkPageTemplate = ({ data }) => {
       <WorkPageAnimations />
       <WorkPageHeader />
       <button
-        onClick={() => navigate(-1, { replace: true })}
+        onClick={handleBackLink}
         className={returnLink}
       >
         back to selected works

@@ -54,6 +54,13 @@
       width: 1px;
     }
   }
+
+  .col:first-child {
+    transform: translate(-100%, 0);
+  }
+  .col:last-child {
+    transform: translate(100%, 0);
+  }
 }
 
 .horizontal {

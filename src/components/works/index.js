@@ -7,7 +7,6 @@ import {
   workList,
 } from "./work.module.scss"
 
-
 const Works = ({ heading }) => {
   const {
     allContentfulWorks: { nodes: works },
@@ -25,7 +24,7 @@ const Works = ({ heading }) => {
   `)
 
   return (
-      <Section heading={heading}>
+      <Section heading={heading} id="selected-works">
         <div className={workList}>
           {works.map(({ id, title, slug }, i) => (
             <WorkItem 

@@ -29,6 +29,7 @@ const Layout = ({ children, location }) => {
   `)
 
   return (
+      typeof window !== "undefined" && window &&
       <PageTransitions location={location}>
         <Grid id="grid" isVertical={true} />
         {/* <SmoothScroll> */}
