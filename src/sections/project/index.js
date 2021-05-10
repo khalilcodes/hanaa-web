@@ -1,7 +1,7 @@
 import React from "react"
-import Section from '../sections'
 import { graphql, useStaticQuery } from "gatsby"
 
+import { Section } from '../../components'
 import DesktopView from './desktopView'
 import MobileView from './mobileView'
 

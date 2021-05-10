@@ -1,6 +1,6 @@
 import React from "react"
 import { StaticImage } from 'gatsby-plugin-image'
-import About from '../about'
+import { About } from '../../components'
 
 import { bannerContainer, heroImage, bannerTitle } from "./banner.module.scss"
 

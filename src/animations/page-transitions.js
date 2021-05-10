@@ -1,24 +1,29 @@
 import React, { useEffect } from "react"
 import { SwitchTransition, Transition } from "react-transition-group"
 import gsap from "gsap"
-import useWindowSize from '../../hooks/useWindowSize'
+import useWindowSize from '../hooks/useWindowSize'
 
 gsap.registerPlugin()
 
-export const PageTransitions = ({ children, location }) => {
+const PageTransitions = ({ children, location }) => {
     const { width } = useWindowSize()
     let breakpoint = width < 1024
 
-    useEffect(() => {
-        const noScroll = () => window.scrollTo(0,0)
+    const [state, setState] = React.useState({ x: 0, y: 0 })
 
-        window.onpopstate = () => {
-            window.addEventListener('scroll', noScroll)
-            setTimeout(() => {
-                window.removeEventListener('scroll', noScroll)
-            }, 1000);
-        }
+    const noScroll = () => window.scrollTo(0,0)
+
+    useEffect(() => {
+      setState({ x: window.scrollX, y: window.scrollY })
+
+      // window.onpopstate = () => {
+      //     window.addEventListener('scroll', noScroll)
+      //     setTimeout(() => {
+      //         window.removeEventListener('scroll', noScroll)
+      //     }, 1000);
+      // }
     },[])
+
 
     function getNode(node) {
       var page = node.querySelectorAll("header, main, footer")
@@ -29,7 +34,11 @@ export const PageTransitions = ({ children, location }) => {
         right = node.querySelector("#grid").lastChild
       }
 
-      if (!breakpoint) return { page, left, right }
+      if (!breakpoint) return { 
+        page, 
+        left, 
+        right 
+      }
 
       return { page }
     }
@@ -41,6 +50,7 @@ export const PageTransitions = ({ children, location }) => {
         tl
           .to(page, {
             autoAlpha: 0,
+            duration: 0.3
           })
 
         if (!breakpoint) {
@@ -72,7 +82,7 @@ export const PageTransitions = ({ children, location }) => {
     }
 
   return (
-    <SwitchTransition mode="out-in">
+    <SwitchTransition mode="out-in" >
       <Transition
         key={location.pathname}
         timeout={{
@@ -84,6 +94,9 @@ export const PageTransitions = ({ children, location }) => {
         appear={true}
         onExit={exit}
         onEnter={enter}
+        addEndListener={(node, done) => {
+          
+        }}
       >
         <div style={{ overflow: "hidden" }}>
           {children}
@@ -92,3 +105,5 @@ export const PageTransitions = ({ children, location }) => {
     </SwitchTransition>
   )
 }
+
+export default PageTransitions

@@ -1,15 +1,8 @@
 import React from "react"
 
-import {
-  SEO as SeO,
-  Banner,
-  Works,
-  Contact,
-  Project,
-  Quote,
-  ProjectFullscreen,
-  HomepageAnimations
-} from '../components'
+import { SEO as SeO, ProjectFullscreen } from '../components'
+import { Banner, Works, Project, Quote, Contact } from '../sections'
+import { HomepageAnimations } from '../animations'
 
 const Index = () => {
   

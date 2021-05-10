@@ -1,10 +1,9 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import { graphql, navigate } from "gatsby"
 import { GatsbyImage } from "gatsby-plugin-image"
-import { SEO as SeO } from "../components"
-import { WorkPageHeader } from '../components/header'
-import Section from '../components/sections'
-import { WorkPageAnimations } from '../components'
+
+import { SEO as SeO, Section, WorkPageHeader } from '../components'
+import { WorkpageAnimations } from '../animations'
 
 import {
   container,
@@ -22,6 +21,13 @@ const WorkPageTemplate = ({ data, location }) => {
     images,
   } = data.contentfulWorks
 
+  const browser = typeof window !== "undefined" && window
+  const [hasMounted, setHasMounted] = useState(false)
+
+  useEffect(() => {
+    setHasMounted(true)
+  },[])
+
   const handleBackLink = () => {
     if (typeof window !== "undefined" && location) {
       navigate(
@@ -29,11 +35,14 @@ const WorkPageTemplate = ({ data, location }) => {
       )
     }
   }
+
+  if (!hasMounted) return null
     
   return (
+    browser &&
     <>
       <SeO title={title} />
-      <WorkPageAnimations />
+      <WorkpageAnimations />
       <WorkPageHeader />
       <button
         onClick={handleBackLink}

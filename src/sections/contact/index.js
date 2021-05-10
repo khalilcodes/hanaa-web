@@ -1,8 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react'
 import { graphql, useStaticQuery } from "gatsby"
-import Section from '../sections'
-import Grid from '../grid'
-import Form from '../Form/Form'
+
+import { Section, Grid, Form } from '../../components'
 import { gsap } from 'gsap'
 
 import {

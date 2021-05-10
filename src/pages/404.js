@@ -20,7 +20,10 @@ const NotFoundPage = () => {
     })
   },[])
 
+  const browser = typeof window !== "undefined" && window
+
   return (
+    browser &&
     <>
       <SeO title="404: Not found" />
       <div className={container}>

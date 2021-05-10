@@ -1,11 +1,9 @@
 import React from "react"
 import { useStaticQuery, graphql } from 'gatsby'
-import Section from '../sections'
+import { Section } from '../../components'
 import WorkItem from './workItem'
 
-import {
-  workList,
-} from "./work.module.scss"
+import { workList } from "./work.module.scss"
 
 const Works = ({ heading }) => {
   const {
