@@ -13,11 +13,11 @@
     return <ContextProvider>{element}</ContextProvider>
  }
 
- const transitionDelay = 1000
+ const transitionDelay = 1001
 
  export const onRouteUpdate = ({ location }) => {
    const { hash } = location
-    console.log(hash)
+  
    if (hash) {
      setTimeout(() => {
        gsap.to(window, {
@@ -34,6 +34,10 @@
    routerProps: { location },
    getSavedScrollPosition,
  }) => {
+    if ("scrollRestoration" in window.history) {
+      window.history.scrollRestoration = "manual"
+    }
+
      if (location.action === "PUSH") {
        window.setTimeout(() => window.scrollTo(0, 0), transitionDelay)
      } else {

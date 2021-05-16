@@ -2,52 +2,50 @@
 
 .container {
     position: relative;
-
-    margin: 6rem 0;
-
-    // @media (min-width: 512px) {
-    //     margin: 8rem 0 4rem;
-    // }
+    padding: 0 1.8rem;
+    background: rgba(255, 200, 0, 0.65);
+    height: 60vh;
 
     .quote-wrapper {
         position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        
+        width: 100%;
         margin: auto;
+
+        @media (min-width: 768px) {
+            max-width: 512px;
+        }
+        @media (min-width: 1024px) {
+            max-width: 768px;
+        }
+        @media (min-width: 1200px) {
+            max-width: 900px;
+        }
     
-        .main-text {
-            position: absolute;
-            left: 50%;
-            top: 20%;
-            
-            // @media (min-width: 512px) {
-            //     top: 50%;
-            // }
-            
-            transform: translate(-50%, -50%);
-            width: 400px;
-            max-width: calc(100% - 12rem);
-            
-            @media (min-width: 1700px) {
-                width: 570px;
-            }
-    
-            @media (max-width: 1024px) {
-                width: 370px;
-            }
-            
+        svg {
+            height: 60%;
+            overflow: visible;
+        }
+        
+        h1 {
             font-family: var(--playfair-font);
             font-weight: 800;
             @include fluid-type(22, 28, 320, 512);
             @include fluid-type(24, 48, 512, 2560);
     
             text-align: center;
-            z-index: 9;
-        }
-    
-        .image-container {
-            width: 100%;
-            img {
-                width: 100%;
-            }
+            
+            margin: 0;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%,-50%);
         }
     }
+
 }

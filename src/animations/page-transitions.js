@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React, { useState, useEffect } from "react"
 import { SwitchTransition, Transition } from "react-transition-group"
 import gsap from "gsap"
 import useWindowSize from '../hooks/useWindowSize'
@@ -9,76 +9,64 @@ const PageTransitions = ({ children, location }) => {
     const { width } = useWindowSize()
     let breakpoint = width < 1024
 
-    const [state, setState] = React.useState({ x: 0, y: 0 })
+    const [timeline] = useState(gsap.timeline())
+    const [state, setState] = useState({
+      isAppearing: true,
+      played: false
+    })
 
-    const noScroll = () => window.scrollTo(0,0)
-
-    useEffect(() => {
-      setState({ x: window.scrollX, y: window.scrollY })
-
-      // window.onpopstate = () => {
-      //     window.addEventListener('scroll', noScroll)
-      //     setTimeout(() => {
-      //         window.removeEventListener('scroll', noScroll)
-      //     }, 1000);
-      // }
-    },[])
-
-
-    function getNode(node) {
-      var page = node.querySelectorAll("header, main, footer")
-      var left, right
-
-      if (!breakpoint) {
-        left = node.querySelector("#grid").firstChild
-        right = node.querySelector("#grid").lastChild
-      }
-
-      if (!breakpoint) return { 
-        page, 
-        left, 
-        right 
-      }
-
-      return { page }
-    }
-
-    const exit = (node) => {
-        const { page } = getNode(node)
-
-        const tl = gsap.timeline()
-        tl
-          .to(page, {
+    const anim = (node, animationState) => {
+      if (typeof window !== "undefined") {
+        var page = node.querySelectorAll("header, main, footer")
+  
+        if (animationState === "enter") {
+          timeline.from(page, {
+            autoAlpha: 0,
+          })
+        } else {
+          timeline.to(page, {
             autoAlpha: 0,
             duration: 0.3
           })
-
-        if (!breakpoint) {
-          const { left, right } = getNode(node)
-          const tween = gsap.to([left, right], {
-            x: gsap.utils.wrap([-left.clientWidth, right.clientWidth]),
-          })
-          tl.add(tween, "<")
         }
+  
+        if (!breakpoint) {
+          var left = node.querySelector("#grid").firstChild
+          var right = node.querySelector("#grid").lastChild
+  
+          const gridTween = gsap.timeline().to([left,right], {
+            x: gsap.utils.wrap(animationState === "enter" ? [0,0] : [-left.clientWidth, right.clientWidth]),
+            delay: 0.5,
+            onComplete: () => animationState === "enter" ? setState({ ...state, played: true }) : null
+          })
+  
+          timeline.add(gridTween, "<")
+        }
+        return timeline
+      }
     }
 
-    const enter = (node) => {
-        const { page } = getNode(node)
+    useEffect(() => {
+      if (breakpoint) setState({ isAppearing: false, played: false })
 
-        const tl = gsap.timeline()
-        tl
-          .from(page, {
-            autoAlpha: 0,
+      if (!breakpoint && !state.played && !state.isAppearing) {
+        setTimeout(() => {
+          var grid = document.querySelector("#grid")
+          gsap.set([grid.firstChild,grid.lastChild], {
+            x: gsap.utils.wrap([0,0])
           })
+        }, 100);
+      }
+    },[breakpoint, state.isAppearing, state.played])
 
-        if (!breakpoint) {
-          const { left, right } = getNode(node)
-          const tween = gsap.to([left, right], {
-            x: gsap.utils.wrap([0, 0]),
-            delay: 1,
-          })
-          tl.add(tween, "<")
-        }
+
+    const exit = (node) => {
+      anim(node, "exit").play()
+    }
+
+    const enter = (node, isAppearing) => {
+      setState({ ...state, isAppearing: isAppearing })
+      anim(node, "enter").play()
     }
 
   return (
@@ -94,9 +82,6 @@ const PageTransitions = ({ children, location }) => {
         appear={true}
         onExit={exit}
         onEnter={enter}
-        addEndListener={(node, done) => {
-          
-        }}
       >
         <div style={{ overflow: "hidden" }}>
           {children}

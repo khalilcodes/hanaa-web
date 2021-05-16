@@ -3,33 +3,25 @@ import { gsap } from "gsap"
 
 const IndexpageAnims = () => {
   useEffect(() => {
+    var title = document.querySelector("#banner-title")
+    var about = document.querySelector("#about-text")
+
     const tl = gsap.timeline()
 
-    tl.to(".animate-banner-title", {
+    tl.to([title, about], {
       opacity: 1,
-      duration: 0.1,
-    },"0.1")
-      .from(".animate-banner-title span", {
-        y: 70,
-        duration: 1.8,
-        ease: "power4.out",
-        delay: 0.3,
-        // skewY: 3,
-        stagger: {
-          amount: 0.2,
-        },
-      })
-      .to(".about-text", {
-        opacity: 1,
-        delay: -1.2,
-      })
-      .from(".about-text", {
-        y: 100,
-        duration: 1.8,
-        ease: "power4.out",
-        delay: -1.2,
-        skewY: 7,
-      })
+    })
+    .from(title.firstChild, {
+      y: title.clientHeight,
+      ease: "power4.out",
+      duration: 1.5
+    }).from(about, {
+      y: -about.parentElement.clientHeight,
+      ease: "power4.out",
+      duration: 1.5,
+    },"<0.75")
+
+    tl.delay(0.8)
   }, [])
 
   return null
