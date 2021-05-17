@@ -9,7 +9,8 @@
     width: 100%;
     height: 100vh;
     // background: #FFC800;
-    background: rgba(255, 200, 0, 0.65);
+    // background: rgba(255, 200, 0, 0.65);
+    background: var(--theme-gradient)
     // background: #AC7B84;
 }
 

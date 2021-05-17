@@ -29,14 +29,6 @@ const Form = () => {
       color: ""
     })
 
-    function clearSubmit() {
-      setIsSubmiting(false)
-      setTimeout(() => {
-        setStatus({ ...status, message: null })
-      }, 5000)
-      setValues({})
-    }
-
     function encode(data) {
       return Object.keys(data)
         .map(
@@ -45,18 +37,30 @@ const Form = () => {
         .join("&")
     }
 
-    const handleSubmit = async () => {
+    function clearSubmit() {
+      setIsSubmiting(false)
+      setTimeout(() => {
+        setStatus(status => ({ ...status, message: null }))
+      }, 5000)
+      setValues({})
+    }
 
+    const handleSubmit = async () => {
       try {
         await fetch("/", {
           method: "POST",
           headers: {
-            "Content-Type": "application/x-www-form-urlencoded"
+            "Content-Type": "application/x-www-form-urlencoded",
           },
-          body: encode({ "form-name": contactFormName, ...values })
-        }).then(() => {
-          setStatus({ color: "darkgreen", message: "Thank you! Your message has been sent." })
-        }).finally(() => clearSubmit())
+          body: encode({ "form-name": contactFormName, ...values }),
+        })
+          .then(() => {
+            setStatus({
+              color: "darkgreen",
+              message: "Thank you! Your message has been sent.",
+            })
+          })
+          .finally(() => clearSubmit())
       } catch (err) {
         setStatus({ color: "darkred", message: "some error occurred." })
         clearSubmit()

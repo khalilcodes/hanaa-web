@@ -138,7 +138,7 @@
                 border: solid;
                 border-image-slice: 1;
                 border-width: 2px;
-                border-image-source: linear-gradient(to right, #29a9e0, #f9ad42, #e61389);
+                border-image-source: var(--theme-gradient);
                 z-index: 1;
             }
 

@@ -15,6 +15,22 @@ const PageTransitions = ({ children, location }) => {
       played: false
     })
 
+    useEffect(() => {
+      if (breakpoint) {
+        setState({ isAppearing: false, played: false })
+      }
+
+      if (!breakpoint && !state.played && !state.isAppearing) {
+        setTimeout(() => {
+          var grid = document.querySelector("#grid")
+          gsap.to([grid.firstChild, grid.lastChild], {
+            x: gsap.utils.wrap([0, 0]),
+            duration: 0.3
+          })
+        }, 100)
+      }
+    }, [breakpoint, state.isAppearing, state.played])
+
     const anim = (node, animationState) => {
       if (typeof window !== "undefined") {
         var page = node.querySelectorAll("header, main, footer")
@@ -45,20 +61,6 @@ const PageTransitions = ({ children, location }) => {
         return timeline
       }
     }
-
-    useEffect(() => {
-      if (breakpoint) setState({ isAppearing: false, played: false })
-
-      if (!breakpoint && !state.played && !state.isAppearing) {
-        setTimeout(() => {
-          var grid = document.querySelector("#grid")
-          gsap.set([grid.firstChild,grid.lastChild], {
-            x: gsap.utils.wrap([0,0])
-          })
-        }, 100);
-      }
-    },[breakpoint, state.isAppearing, state.played])
-
 
     const exit = (node) => {
       anim(node, "exit").play()

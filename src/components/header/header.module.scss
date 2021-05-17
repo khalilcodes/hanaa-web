@@ -115,11 +115,7 @@ header {
 
 
 .work-page-header {
-    @media (min-width: 512px) {
-      position: relative;
-    }
-    position: absolute;
-    top: 0;
+    position: relative;
     width: 100%;
     height: 4rem;
     @include content-center();
@@ -140,7 +136,8 @@ header {
       height: 1rem;
       width: 100%;
 
-      background-image: url('../../images/selectedWorks/three-lines.png');
+      // background-image: url('../../images/selectedWorks/three-lines.png');
+      background-image: var(--theme-gradient);
       background-repeat: no-repeat;
       background-size: 100% 100%;
     }

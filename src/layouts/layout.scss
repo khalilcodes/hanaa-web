@@ -1,5 +1,12 @@
 :root {
+  --gradient-alpha: 0.25;
   --theme-charcoal: #454e57;
+  --theme-gradient: linear-gradient(
+        to right, 
+        rgba(41, 169, 224, var(--gradient-alpha)), 
+        rgb(249, 173, 66, var(--gradient-alpha)), 
+        rgb(230, 19, 137, var(--gradient-alpha))
+    );
   --abril-font: 'Abril Fatface';
   --playfair-font: 'Playfair Display';
 }
