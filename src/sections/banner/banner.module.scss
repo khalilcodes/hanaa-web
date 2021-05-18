@@ -8,16 +8,14 @@
     justify-content: center;
     width: 100%;
     height: 100vh;
-    // background: #FFC800;
-    // background: rgba(255, 200, 0, 0.65);
     background: var(--theme-gradient)
-    // background: #AC7B84;
 }
 
 .divider-line {
+    position: relative;
     padding: 1.5px 0;
     background: var(--theme-charcoal);
-    width: 100%;
+    width: 70vw;
 }
 
 .banner-title {
@@ -35,7 +33,6 @@
     justify-content: center;
     text-align: center;
 
-    // @include fluid-type(26, 42, 320, 512);
     @include fluid-type(22, 28, 320, 512);
     @include fluid-type(16, 60, 512, 2560);
     

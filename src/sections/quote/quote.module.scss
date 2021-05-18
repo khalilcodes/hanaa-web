@@ -3,7 +3,6 @@
 .container {
     position: relative;
     padding: 0 1.8rem;
-    // background: rgba(255, 200, 0, 0.65);
     background: var(--theme-gradient);
     height: 60vh;
 
@@ -46,6 +45,7 @@
             left: 50%;
             top: 50%;
             transform: translate(-50%,-50%);
+            opacity: 0;
         }
     }
 

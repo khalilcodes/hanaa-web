@@ -60,7 +60,7 @@ const Project = ({ heading }) => {
   }
 
   return (
-    <Section heading={heading}>
+    <Section heading={heading} id="uni-project">
       <div className={projectDescription}>
         {Object.keys(projectDetails).map(key => (
           <span key={key}>

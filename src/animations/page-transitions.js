@@ -21,6 +21,8 @@ const PageTransitions = ({ children, location }) => {
       }
 
       if (!breakpoint && !state.played && !state.isAppearing) {
+        /* adding delay for the new node to render and 
+        then use querySelector otherwise after route change would throw error */
         setTimeout(() => {
           var grid = document.querySelector("#grid")
           gsap.to([grid.firstChild, grid.lastChild], {
