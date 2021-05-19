@@ -23,7 +23,7 @@ module.exports = {
       options: {
         start_url: `/`,
         background_color: `#ffffff`,
-        theme_color: `#ad788e`,
+        theme_color: `#454e57`,
         display: `minimal-ui`,
         icon: `src/images/favicon.svg`,
       },
