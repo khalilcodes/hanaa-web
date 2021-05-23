@@ -5,7 +5,6 @@ import { Banner, Works, Project, Quote, Contact } from '../sections'
 import { HomepageAnimations } from '../animations'
 
 const Index = () => {
-  
   return (
     <>
       <HomepageAnimations />

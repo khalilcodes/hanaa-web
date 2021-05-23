@@ -6,88 +6,54 @@ import useWindowSize from '../hooks/useWindowSize'
 gsap.registerPlugin()
 
 const PageTransitions = ({ children, location }) => {
-    const { width } = useWindowSize()
-    let breakpoint = width < 1024
+  const { width } = useWindowSize()
+  var breakpoint = width >= 1024
 
-    const [timeline] = useState(gsap.timeline())
-    const [state, setState] = useState({
-      isAppearing: true,
-      played: false
-    })
+  const [node, setNode] = useState(null)
+  const [tl] = useState(gsap.timeline({ paused: true }))
 
-    useEffect(() => {
+  useEffect(() => {
+    if (node !== null) {
+      var page = node.querySelectorAll("header, main, footer")
+      tl.to(page, { autoAlpha: 1 })
+
       if (breakpoint) {
-        setState({ isAppearing: false, played: false })
-      }
-
-      if (!breakpoint && !state.played && !state.isAppearing) {
-        /* adding delay for the new node to render and 
-        then use querySelector otherwise after route change would throw error */
         setTimeout(() => {
-          var grid = document.querySelector("#grid")
-          gsap.to([grid.firstChild, grid.lastChild], {
-            x: gsap.utils.wrap([0, 0]),
-            duration: 0.3
-          })
-        }, 100)
-      }
-    }, [breakpoint, state.isAppearing, state.played])
-
-    const anim = (node, animationState) => {
-      if (typeof window !== "undefined") {
-        var page = node.querySelectorAll("header, main, footer")
-  
-        if (animationState === "enter") {
-          timeline.from(page, {
-            autoAlpha: 0,
-          })
-        } else {
-          timeline.to(page, {
-            autoAlpha: 0,
-            duration: 0.3
-          })
-        }
-  
-        if (!breakpoint) {
           var left = node.querySelector("#grid").firstChild
           var right = node.querySelector("#grid").lastChild
-  
-          const gridTween = gsap.timeline().to([left,right], {
-            x: gsap.utils.wrap(animationState === "enter" ? [0,0] : [-left.clientWidth, right.clientWidth]),
-            delay: 0.5,
-            onComplete: () => animationState === "enter" ? setState({ ...state, played: true }) : null
+
+          var tween = gsap.timeline().to([left, right], {
+            x: gsap.utils.wrap([0, 0]),
           })
-  
-          timeline.add(gridTween, "<")
-        }
-        return timeline
+          tl.add(tween)
+        }, 100);
       }
     }
+  },[node, tl, breakpoint])
 
-    const exit = (node) => {
-      anim(node, "exit").play()
+  const onEnter = node => {
+    if(node) {
+      var page = node.querySelectorAll("header, main, footer")
+      gsap.set(page, { autoAlpha: 0 })
     }
-
-    const enter = (node, isAppearing) => {
-      setState({ ...state, isAppearing: isAppearing })
-      anim(node, "enter").play()
-    }
+  }
 
   return (
-    <SwitchTransition mode="out-in" >
+    <SwitchTransition>
       <Transition
         key={location.pathname}
-        timeout={{
-          appear: 2000,
-          enter: 2000,
-          exit: 1000
-        }}
+        timeout={1000}
         in={true}
         appear={true}
-        onExit={exit}
-        onEnter={enter}
+        onEnter={onEnter}
+        onEntering={() => tl.play()}
+        onExiting={() => tl.reverse()}
+        addEndListener={(node,done) => {
+          if (node) setNode(n => n = node)
+          tl.eventCallback("onComplete", done, ["{self}"])
+        }}
       >
-        <div style={{ overflow: "hidden" }}>
+        <div id="page-transition-wrapper">
           {children}
         </div>
       </Transition>

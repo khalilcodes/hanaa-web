@@ -3,29 +3,32 @@ import { gsap } from 'gsap'
 
 const WorkpageAnims = () => {
     useEffect(() => {
-        var section = document.getElementsByClassName('animate-section-wrapper')
-        var workTitle = ".animate-section-wrapper h1"
-        var description = ".animate-section-wrapper p"
-        var images = section[0].lastChild
+        var section = document.querySelector("#work-section")
+        var workTitle = section.children[0]
+        var underline = section.children[1]
 
-        const tl = gsap.timeline()
-        
-        tl.from(workTitle, {
-          opacity: 0,
-          duration: 0.3,
-        }).from(workTitle, {
-          y: 50,
-          duration: 1,
-          delay: 0.3,
-          ease: "power4.out",
-        }).from(description, {
-            y: 100,
-            duration: 1.8,
-            skewY: 7,
-            ease: "power4.out",
-        },"0.1").from(images, {
-            opacity: 0,
-        },"1")
+        gsap.set(underline, {
+          width: workTitle.getBoundingClientRect().width + 30
+        })
+
+        var children = gsap.utils.toArray(section.children)
+        var items = children.filter(item => item !== underline && item !== workTitle)
+
+        gsap
+          .timeline()
+          .from(
+            workTitle.firstChild,
+            {
+              y: workTitle.getBoundingClientRect().height,
+              ease: "power4.out",
+              duration: 1.5,
+            },
+          )
+          .from(items, {
+            autoAlpha: 0,
+            duration: 2,
+            stagger: 0.5,
+          },"0.3")
     },[])
     return null
 }

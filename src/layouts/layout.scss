@@ -30,18 +30,23 @@ html, body {
   overscroll-behavior-y: none;
   // -ms-overflow-style: none;
   scrollbar-width: none;
+  
 
   div {
     box-sizing: border-box;
   }
 }
 
-main {
-  min-height: calc(100vh - 4rem);
-}
-
 body::-webkit-scrollbar {
   display: none;
+}
+
+#page-transition-wrapper {
+  overflow: hidden;
+}
+
+main {
+  min-height: calc(100vh - 4rem);
 }
 
 a {

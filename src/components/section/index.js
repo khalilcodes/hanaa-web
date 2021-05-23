@@ -8,7 +8,7 @@ import {
 const Section = (props) => {
     const { heading, children, className } = props
     return (
-        <div {...props} className={`${container} ${className} animate-section-wrapper`}>
+        <div {...props} className={`${container} ${className}`}>
             {
                 heading &&
                 <div className={titleStyle} style={{ overflow: "hidden"}}>

@@ -8,6 +8,7 @@ import { WorkpageAnimations } from '../animations'
 import {
   container,
   returnLink,
+  line,
   descriptionWrapper,
   imagesContainer,
   gatsbyImageWrapper,
@@ -50,7 +51,8 @@ const WorkPageTemplate = ({ data, location }) => {
       >
         back to selected works
       </button>
-      <Section heading={title} className={container}>
+      <Section heading={title} className={container} id="work-section">
+        <span className={line} />
         <div className={descriptionWrapper}>
           <p>{description}</p>
         </div>
