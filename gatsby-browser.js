@@ -7,13 +7,19 @@
  import React from 'react'
  import ContextProvider from './src/hooks/context'
  import gsap from 'gsap'
+ import { useMediaQuery } from '@material-ui/core'
 
  export const wrapRootElement = ({ element }) => {
     if (typeof window === "undefined" && !window) return null
     return <ContextProvider>{element}</ContextProvider>
  }
 
- const transitionDelay = 1001
+ const TransitionDelay = () => {
+   const matches = useMediaQuery("(min-width: 1024px)")
+    return matches ? true: false
+ }
+
+ let transitionDelay = TransitionDelay ? 2000 : 1000
 
  export const onRouteUpdate = ({ location }) => {
    const { hash } = location
@@ -26,7 +32,7 @@
            offsetY: 0
          },
        })
-     }, transitionDelay);
+     }, 1000);
    }
  }
 

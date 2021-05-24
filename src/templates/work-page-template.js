@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React from "react"
 import { graphql, navigate } from "gatsby"
 import { GatsbyImage } from "gatsby-plugin-image"
 
@@ -15,38 +15,20 @@ import {
   centerGridItem,
 } from "./selected-work.module.scss"
 
-const WorkPageTemplate = ({ data, location }) => {
+const WorkPageTemplate = ({ data }) => {
   const {
     title,
     description: { description },
     images,
   } = data.contentfulWorks
-
-  const browser = typeof window !== "undefined" && window
-  const [hasMounted, setHasMounted] = useState(false)
-
-  useEffect(() => {
-    setHasMounted(true)
-  },[])
-
-  const handleBackLink = () => {
-    if (typeof window !== "undefined" && location) {
-      navigate(
-        location.state !== null ? -1 : "/#selected-works"
-      )
-    }
-  }
-
-  if (!hasMounted) return null
     
   return (
-    browser &&
     <>
       <SeO title={title} />
       <WorkpageAnimations />
       <WorkPageHeader />
       <button
-        onClick={handleBackLink}
+        onClick={() => navigate("/#selected-works")}
         className={returnLink}
       >
         back to selected works
