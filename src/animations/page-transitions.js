@@ -1,23 +1,22 @@
 import React, { useState, useEffect } from "react"
 import { SwitchTransition, Transition } from "react-transition-group"
 import gsap from "gsap"
-import useWindowSize from '../hooks/useWindowSize'
+import { useMediaQuery } from '@material-ui/core'
 
 gsap.registerPlugin()
 
 const PageTransitions = ({ children, location }) => {
-  const { width } = useWindowSize()
-  var breakpoint = width >= 1024
-
   const [node, setNode] = useState(null)
   const [tl] = useState(gsap.timeline({ paused: true }))
+
+  const matches = useMediaQuery("(min-width: 1024px)")
 
   useEffect(() => {
     if (node !== null) {
       var page = node.querySelectorAll("header, main, footer")
-      tl.to(page, { autoAlpha: 1 })
+      tl.to(page, { opacity: 1 })
 
-      if (breakpoint) {
+      if (matches) {
         setTimeout(() => {
           var left = node.querySelector("#grid").firstChild
           var right = node.querySelector("#grid").lastChild
@@ -26,17 +25,10 @@ const PageTransitions = ({ children, location }) => {
             x: gsap.utils.wrap([0, 0]),
           })
           tl.add(tween)
-        }, 100);
+        }, 150);
       }
     }
-  },[node, tl, breakpoint])
-
-  const onEnter = node => {
-    if(node) {
-      var page = node.querySelectorAll("header, main, footer")
-      gsap.set(page, { autoAlpha: 0 })
-    }
-  }
+  },[node, tl, matches])
 
   return (
     <SwitchTransition>
@@ -45,12 +37,13 @@ const PageTransitions = ({ children, location }) => {
         timeout={1000}
         in={true}
         appear={true}
-        onEnter={onEnter}
-        onEntering={() => tl.play()}
-        onExiting={() => tl.reverse()}
+        onEnter={() => tl.play()}
+        onExit={() => tl.reverse()}
         addEndListener={(node,done) => {
-          if (node) setNode(n => n = node)
-          tl.eventCallback("onComplete", done, ["{self}"])
+          if (node) {
+            setNode(node)
+            tl.eventCallback("onComplete", done, ["{self}"])
+          }
         }}
       >
         <div id="page-transition-wrapper">

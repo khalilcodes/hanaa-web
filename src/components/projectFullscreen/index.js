@@ -3,7 +3,7 @@ import { graphql, useStaticQuery } from 'gatsby'
 import { GatsbyImage } from 'gatsby-plugin-image'
 
 import { WebContext } from '../../hooks/context'
-import useWindowSize from '../../hooks/useWindowSize'
+import { useMediaQuery } from '@material-ui/core'
 
 import { 
   fullScreen,
@@ -48,10 +48,9 @@ const ProjectFullscreen = () => {
     }
   `)
     
-  const { width } = useWindowSize()
-  const breakpoint = width >= 1200
+  const matches = useMediaQuery("(min-width: 1200px)")
 
-  const [ { isActive, index }, dispatch ] = React.useContext(WebContext)
+  const [{ isActive, index }, dispatch] = React.useContext(WebContext)
 
   React.useEffect(() => {
     document.body.style.overflow = isActive ? "hidden" : "scroll"
@@ -77,7 +76,7 @@ const ProjectFullscreen = () => {
       setIndex(e, 0, images.length - 1, index - 1)
   }
 
-  // if (!isActive) return null
+  if (!isActive) return null
 
   return (
     <div
@@ -86,8 +85,8 @@ const ProjectFullscreen = () => {
     >
       <div
         className={fullscreenContainer}
-        onClick={breakpoint ? handleClick : null}
-        onKeyDown={breakpoint ? handleClick : null}
+        onClick={matches ? handleClick : null}
+        onKeyDown={matches ? handleClick : null}
         role="button"
         tabIndex="0"
       >

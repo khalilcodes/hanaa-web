@@ -1,12 +1,12 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { graphql, useStaticQuery } from "gatsby"
 
 import { Section } from '../../components'
 import DesktopView from './desktopView'
 import MobileView from './mobileView'
 
-import useWindowSize from '../../hooks/useWindowSize'
 import { WebContext } from "../../hooks/context"
+import { useMediaQuery } from '@material-ui/core'
 
 import {
   projectDescription,
@@ -41,8 +41,7 @@ const Project = ({ heading }) => {
     }
   `)
 
-  const { width } = useWindowSize()
-  const breakpoint =  width < 1200
+  const matches = useMediaQuery("(min-width: 1200px)")
 
   const [{ isActive }, dispatch] = React.useContext(WebContext)
 
@@ -51,13 +50,19 @@ const Project = ({ heading }) => {
     dispatch({ type: "set_index", payload: i })
   }
 
-  let projectsView
+  let mobileView = <MobileView images={images} onClick={handleFullscreen} />
+  let desktopView = <DesktopView images={images} onClick={handleFullscreen} />
 
-  if (breakpoint) {
-    projectsView = <MobileView images={images} onClick={handleFullscreen} />
-  } else {
-    projectsView = <DesktopView images={images} onClick={handleFullscreen} />
-  }
+  const [projectView, setProjectView] = useState(null)
+
+  useEffect(() => {
+    let _isMounted = true
+
+    if (_isMounted && matches) setProjectView(desktopView)
+    if (_isMounted && !matches) setProjectView(mobileView)
+
+    return () => _isMounted = false
+  },[matches])
 
   return (
     <Section heading={heading} id="uni-project">
@@ -70,7 +75,7 @@ const Project = ({ heading }) => {
       </div>
       <div className={projectContainer}>
         <div className={imageWrapper}>
-          {projectsView}
+            {projectView}
         </div>
       </div>
     </Section>

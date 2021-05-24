@@ -82,7 +82,7 @@ export default function HomepageAnimations() {
     })
   },[animationProperties])
 
-  // /* quote animations */
+  /* quote animations */
 
   useEffect(() => {
     let wrapper = document.querySelector("#quote-wrapper")
@@ -110,7 +110,7 @@ export default function HomepageAnimations() {
     )
   },[width])
 
-  // /* contact animations */
+  /* contact animations */
 
   useEffect(() => {
     let contactSection = document.querySelector("#contact")

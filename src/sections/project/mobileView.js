@@ -2,9 +2,7 @@ import React from 'react'
 import Slider from "react-slick"
 
 import { GatsbyImage } from 'gatsby-plugin-image'
-import { stylesImage, fluid } from "./project.module.scss"
-
-import { slider } from './project.module.scss'
+import { stylesImage, fluid, slider } from "./project.module.scss"
 
 const sliderSettings = {
   className: `${slider}`,
@@ -32,23 +30,22 @@ const sliderSettings = {
 }
 
 const MobileView = ({ images, onClick }) => {
-
   return (
     <Slider {...sliderSettings}>
-      {images.map(({ id, name, coverImage: { gatsbyImageData }}, i) => (
-        <div
-          key={id}
-          className={stylesImage}
-          onClick={() => onClick(i)}
-          onKeyDown={() => onClick(i)}
-          onDragStart={e => e.preventDefault()}
-          role="button"
-          tabIndex="0"
-        >
-          <GatsbyImage className={fluid} image={gatsbyImageData} alt={name} />
-          <span>{name}</span>
-        </div>
-      ))}
+        {images.map(({ id, name, coverImage: { gatsbyImageData } }, i) => (
+          <div
+            key={id}
+            className={stylesImage}
+            onClick={() => onClick(i)}
+            onKeyDown={() => onClick(i)}
+            onDragStart={e => e.preventDefault()}
+            role="button"
+            tabIndex="0"
+          >
+            <GatsbyImage className={fluid} image={gatsbyImageData} alt={name} />
+            <span>{name}</span>
+          </div>
+        ))}
     </Slider>
   )
 }

@@ -5,8 +5,8 @@ import PropTypes from "prop-types"
 import Hamburger from './hamburger'
 import NavigationLinks from './navigation'
 
-import useWindowSize from '../../hooks/useWindowSize'
 import { WebContext } from '../../hooks/context'
+import useMediaQuery from "@material-ui/core/useMediaQuery"
 
 import { container, workPageHeader, titleStyles } from './header.module.scss'
 
@@ -21,21 +21,20 @@ export const WorkPageHeader = () => {
 
 const Header = ({ siteTitle }) => {
   const [{ showMenu }, dispatch] = useContext(WebContext)
-  const { width } = useWindowSize()
-  let breakpoint = width < 968
+  const matches = useMediaQuery("(min-width: 968px)")
 
   let nav
 
-  const handleClose = e => {
-    if (breakpoint && showMenu) {
-      if (e) dispatch({ type: "toggle_menu", payload: !showMenu })
-    }
-  }
-
-  if (breakpoint) {
-    nav = <Hamburger breakpoint={breakpoint} />
+  if (!matches) {
+    nav = <Hamburger breakpoint={!matches} />
   } else {
     nav = <NavigationLinks />
+  }
+
+  const handleClose = e => {
+    if (!matches && showMenu) {
+      if (e) dispatch({ type: "toggle_menu", payload: !showMenu })
+    }
   }
 
   return (
