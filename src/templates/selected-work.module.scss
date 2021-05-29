@@ -31,6 +31,7 @@
     align-items: center;
     justify-items: center;
     max-width: 1280px;
+    margin: auto;
 
     @media (min-width: 512px) {
         padding: 0 3rem;
@@ -52,6 +53,10 @@
 
     h1, .description-wrapper {
         padding: 2rem 0 .5rem;
+
+        @media (min-width: 1600px) {
+            padding-top: 3rem;
+        }
     }
 
     .line {

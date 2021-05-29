@@ -7,6 +7,14 @@
   width: 100%;
   left: 0;
 
+  @media (min-width: 1600px) {
+    height: 5rem;
+  }
+
+  @media (min-width: 1800px) {
+    height: 6rem;
+  }
+
   display: flex;
   align-items: center;
   justify-content: center;

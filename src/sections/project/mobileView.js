@@ -41,9 +41,10 @@ const MobileView = ({ images, onClick }) => {
             onDragStart={e => e.preventDefault()}
             role="button"
             tabIndex="0"
+            data-name={name}
           >
             <GatsbyImage className={fluid} image={gatsbyImageData} alt={name} />
-            <span>{name}</span>
+            {/* <span>{name}</span> */}
           </div>
         ))}
     </Slider>

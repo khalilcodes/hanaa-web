@@ -26,6 +26,19 @@ $scaled: 9999px 0 0 0px var(--theme-charcoal);
     @media (min-width: 768px) {
         padding: 0 2.5rem;
     }
+
+    @media (min-width: 1024px) {
+        padding: 1rem 2.5rem;
+        transform: translateX(-2.5rem);
+    }
+
+    @media (min-width: 1600px) {
+        padding: 2rem 5rem;
+    }
+
+    @media (min-width: 1800px) {
+        padding: 4rem 6rem;
+    }
     
 
     @include fluid-type(14, 18, 320, 512);
