@@ -1,7 +1,7 @@
 import React from "react"
 import { graphql, navigate } from "gatsby"
 import { GatsbyImage } from "gatsby-plugin-image"
-
+import useMediaQuery from "@material-ui/core/useMediaQuery"
 import { SEO as SeO, Section, WorkPageHeader } from '../components'
 import { WorkpageAnimations } from '../animations'
 
@@ -21,6 +21,8 @@ const WorkPageTemplate = ({ data }) => {
     description: { description },
     images,
   } = data.contentfulWorks
+
+  const matches = useMediaQuery("(min-width: 968px)")
     
   return (
     <>
@@ -45,7 +47,7 @@ const WorkPageTemplate = ({ data }) => {
               image={gatsbyImageData}
               alt={title}
               className={`${gatsbyImageWrapper} ${
-                images.length % 2 !== 0 ? centerGridItem : ""
+                matches && images.length % 2 !== 0 ? centerGridItem : ""
               }`}
             />
           ))}

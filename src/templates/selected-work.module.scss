@@ -30,11 +30,15 @@
     display: grid;
     align-items: center;
     justify-items: center;
-    max-width: 1280px;
+    max-width: 1024px;
     margin: auto;
 
     @media (min-width: 512px) {
-        padding: 0 3rem;
+        width: 80vw;
+    }
+
+    @media (min-width: 1600px) {
+        max-width: 1200px;
     }
 
     font-family: var(--playfair-font);
@@ -66,9 +70,10 @@
 
     .description-wrapper {
         overflow: hidden;
+        padding-left: 2rem;
+        padding-right: 2rem;
         
         p {
-            overflow: hidden; 
             line-height: 1.4;
             text-align: justify;
         }
