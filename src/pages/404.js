@@ -9,6 +9,7 @@ import {
   fourZeroFour,
   textContent,
   description,
+  imgStyle
 } from "../styles/404.module.scss"
 
 const NotFoundPage = () => {
@@ -38,7 +39,8 @@ const NotFoundPage = () => {
             src="../images/404/blank_canvas.png"
             alt="blank canvas"
             placeholder="blurred"
-            width={500}
+            className={imgStyle}
+            // width={500}
           />
         </div>
       </div>
