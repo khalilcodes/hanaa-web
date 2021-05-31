@@ -22,7 +22,7 @@
   text-transform: lowercase;
   background: var(--theme-charcoal);
   
-  a {
+  div {
     @include fluid-type(16, 24, 512, 2560);
 
     display: flex;

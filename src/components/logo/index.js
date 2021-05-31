@@ -1,5 +1,4 @@
 import React, { useEffect, useRef } from "react"
-import { Link } from "gatsby"
 
 import { gsap } from "gsap"
 import { ScrollToPlugin, ScrollTrigger, TimelineLite } from "gsap/all"
@@ -42,7 +41,7 @@ const Logo = ({ bottom }) => {
 
   return (
     <div ref={el => logoRef = el} className={`${stylesLogo} ${position}`}>
-      <Link to="/">H</Link>
+      <div>H</div>
     </div>
   )
 }

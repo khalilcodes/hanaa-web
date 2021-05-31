@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useCallback, useEffect, useMemo, useState } from "react"
 import { graphql, useStaticQuery } from "gatsby"
 
 import { Section } from '../../components'
@@ -45,13 +45,18 @@ const Project = ({ heading }) => {
 
   const [{ isActive }, dispatch] = React.useContext(WebContext)
 
-  const handleFullscreen = (i) => {
+  const handleFullscreen = useCallback((i) => {
     dispatch({ type: "toggle_fullscreen", payload: !isActive })
     dispatch({ type: "set_index", payload: i })
-  }
+  },[dispatch, isActive])
 
-  let mobileView = <MobileView images={images} onClick={handleFullscreen} />
-  let desktopView = <DesktopView images={images} onClick={handleFullscreen} />
+  let mobileView = useMemo(() => {
+    return <MobileView images={images} onClick={handleFullscreen} />
+  },[handleFullscreen, images])
+  
+  let desktopView = useMemo(() => {
+    return <DesktopView images={images} onClick={handleFullscreen} />
+  },[handleFullscreen, images])
 
   const [projectView, setProjectView] = useState(null)
 
@@ -62,7 +67,7 @@ const Project = ({ heading }) => {
     if (_isMounted && !matches) setProjectView(mobileView)
 
     return () => _isMounted = false
-  },[matches])
+  },[matches, desktopView, mobileView])
 
   return (
     <Section heading={heading} id="uni-project">
