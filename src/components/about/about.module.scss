@@ -5,17 +5,26 @@
     overflow: hidden;
 
     text-align: center;
-    max-width: 280px;
+    // min-width: 250px;
+    max-width: 250px;
     font-family: var(--playfair-font);
-    line-height: 26px;
+    line-height: 21px;
     display: flex;
     padding: 10px 0;
     
     @include fluid-type(14, 18, 320, 512);
     @include fluid-type(14, 28, 512, 2560);
 
+    @media (min-width: 322px) {
+        max-width: 280px;
+    }
+
+    @media (min-width: 1200px) {
+        line-height: 26px;
+    }
+
     @media (min-width: 512px) {
-        max-width: 425px;
+        max-width: 400px;
     }
 
     @media (min-width: 768px) {
