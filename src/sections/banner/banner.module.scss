@@ -1,21 +1,23 @@
 @import '../../styles/mixins.scss';
 
 .banner-container {
+    @include flex-center-column();
     position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
     width: 100%;
     height: 100vh;
-    background: var(--theme-gradient)
+    // height: calc(var(--banner-height, 1vh) * 100);
+    background: var(--theme-gradient);
 }
 
 .divider-line {
     position: relative;
     padding: 1.5px 0;
     background: var(--theme-charcoal);
-    width: 70vw;
+    width: 100%;
+
+    @media (min-width: 768px) {
+        width: 70vw;
+    }
 }
 
 .banner-title {
@@ -24,13 +26,10 @@
     font-family: var(--playfair-font);
     font-weight: 800;
     
-    display: flex;
+    @include flex-center();
     padding: 10px 0;
     margin: 0;
     width: 100%;
-
-    align-items: center;
-    justify-content: center;
     text-align: center;
 
     @include fluid-type(22, 28, 320, 512);

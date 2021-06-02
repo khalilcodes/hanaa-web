@@ -1,12 +1,10 @@
 @import '../styles/mixins.scss';
 
 .container {
-    display: flex;
-    color: var(--theme-charcoal);
-    align-items: center;
-    justify-content: center;
+    @include flex-center();
     height: 100%;
     padding-top: 8rem;
+    color: var(--theme-charcoal);
 
     @media (min-width: 1600px) {
         padding-top: 10rem;
@@ -25,9 +23,8 @@
         }
         
         .text-content {
-            @include content-center();
+            @include flex-center-column();
             margin: auto;
-            flex-direction: column;
             gap: 10px;
             opacity: 0;
 

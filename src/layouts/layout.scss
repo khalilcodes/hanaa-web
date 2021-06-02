@@ -14,7 +14,6 @@
 html {
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
-  scroll-behavior: smooth;
 }
 
 html, body {
@@ -28,7 +27,7 @@ html, body {
   line-height: 1;
   color: var(--theme-charcoal);
   box-sizing: border-box;
-  overscroll-behavior-y: none;
+  // overscroll-behavior-y: none;
   // -ms-overflow-style: none;
   scrollbar-width: none;
   

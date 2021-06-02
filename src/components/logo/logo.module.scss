@@ -15,9 +15,7 @@
     height: 6rem;
   }
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @include flex-center();
   font-family: var(--abril-font);
   text-transform: lowercase;
   background: var(--theme-charcoal);
@@ -25,9 +23,7 @@
   div {
     @include fluid-type(16, 24, 512, 2560);
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include flex-center();
     color: white;
     width: 100%;
     height: 100%;

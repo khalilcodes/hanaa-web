@@ -1,7 +1,7 @@
 import React from "react"
 import { graphql, useStaticQuery } from "gatsby"
 import Grid from "../grid"
-import { socialLinksContainer, socialLinks } from "./footer.module.scss"
+import { container, socialContainer } from "./footer.module.scss"
 
 const LinkComponent = ({ href, children, className }) => {
   return (
@@ -34,12 +34,14 @@ const Footer = () => {
   return (
     <footer>
       <Grid isVertical={false} />
-      <div className={socialLinksContainer}>
-        {socialNetworks.map(({ id, title, url }) => (
-          <LinkComponent className={socialLinks} key={id} href={url}>
-            {title}
-          </LinkComponent>
-        ))}
+      <div className={container}>
+        <div className={socialContainer}>
+          {socialNetworks.map(({ id, title, url }) => (
+            <LinkComponent key={id} href={url}>
+              {title}
+            </LinkComponent>
+          ))}
+        </div>
         <span>
           Developed by{" "}
           <LinkComponent href="https://linkedin.com/in/khalil-ali">

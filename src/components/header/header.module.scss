@@ -1,60 +1,13 @@
 @import '../../styles/mixins.scss';
 
 header {
-  position: absolute;
-  height: 4rem;
+  @include grid-layout();
   z-index: 10;
-  width: 100%;
-
-  @media (min-width: 1600px) {
-    height: 5rem;
-  }
-
-  @media (min-width: 1800px) {
-    height: 6rem;
-  }
-
-  font-family: var(--abril-font);
-  
-  a {
-    text-decoration: none;
-    color: var(--theme-charcoal);
-  }
-
 
   .container {
-    display: grid;
-    grid-template-columns: auto;
-    grid-auto-flow: column;
-
-    align-items: center;
-    height: 100%;
-
-    margin: 0 2rem;
-
-    @media (min-width: 512px) {
-      margin: 0 4rem;
-    }
-
-    @media (min-width: 768px) {
-      margin: 0 5rem;
-    }
-
-    @media (min-width: 1920px) {
-      margin: 0 6rem;
-    }
-
     div {
-      text-transform: lowercase;
-
       @include fluid-type(18, 22, 320, 512);
       @include fluid-type(16, 32, 512, 2560);
-
-      a {
-        line-height: 10px;
-        width: fit-content;
-      }
-
     }
 
     .nav-desktop, .nav-mobile {
@@ -131,10 +84,10 @@ header {
 
 
 .work-page-header {
+    @include flex-center-column();
     position: relative;
     width: 100%;
     height: 4rem;
-    @include content-center();
 
     @media (min-width: 1600px) {
       height: 5rem;

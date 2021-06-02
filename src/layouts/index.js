@@ -12,6 +12,7 @@ import { useStaticQuery, graphql } from "gatsby"
 import { Header, Footer, Grid } from '../components'
 import { PageTransitions } from '../animations'
 // import SmoothScroll from './smoothscroll/smoothscroll'
+import useWindowSize from "../hooks/useWindowSize"
 
 import './layout.scss'
 
@@ -26,20 +27,18 @@ const Layout = ({ children, location }) => {
     }
   `)
 
+  const { height } = useWindowSize()
+
   useEffect(() => {
-    function handleMinHeight() {
       var header = document.querySelector("header").getBoundingClientRect().height
-      var footer = document.querySelector("footer").lastChild.lastChild.clientHeight
-      let vh = (window.innerHeight * 0.01)
+      var footer = document.querySelector("footer")
+      var bottomCredits = footer.lastChild.lastChild.getBoundingClientRect().height
+      let vh = (height * 0.01)
   
       document.documentElement.style.setProperty('--vh', `${vh}px`)
       document.documentElement.style.setProperty('--header', `${header}px`)
-      document.documentElement.style.setProperty('--footer', `${footer}px`)
-    }
-    window.addEventListener('resize', () => handleMinHeight())
-    handleMinHeight()
-    return () => window.removeEventListener('resize', () => handleMinHeight())
-  },[])
+      document.documentElement.style.setProperty('--footer', `${bottomCredits}px`)
+  },[height])
 
   return (
     <PageTransitions location={location}>

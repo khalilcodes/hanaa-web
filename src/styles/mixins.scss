@@ -1,3 +1,61 @@
+
+/* header/footer grid container styles */
+
+@mixin grid-layout {
+  position: absolute;
+  height: 4rem;
+  width: 100%;
+
+  @media (min-width: 1600px) {
+    height: 5rem;
+  }
+
+  @media (min-width: 1800px) {
+    height: 6rem;
+  }
+
+  font-family: var(--abril-font);
+
+  a {
+    text-decoration: none;
+    color: var(--theme-charcoal);
+  }
+
+  .container {
+    display: grid;
+    grid-template-columns: auto;
+    grid-auto-flow: column;
+
+    align-items: center;
+    height: 100%;
+
+    margin: 0 2rem;
+
+    @media (min-width: 512px) {
+      margin: 0 4rem;
+    }
+
+    @media (min-width: 768px) {
+      margin: 0 5rem;
+    }
+
+    @media (min-width: 1920px) {
+      margin: 0 6rem;
+    }
+
+    div {
+      text-transform: lowercase;
+
+      a {
+        line-height: 10px;
+        width: fit-content;
+      }
+    }
+  }
+}
+
+/* calculated responsive font size */
+
 @mixin fluid-type($font-min, $font-max, $screen-min, $screen-max) {
   font-size: #{$font-min}px;
 
@@ -12,9 +70,15 @@
   }
 }
 
-@mixin content-center {
+/* making life easier */
+
+@mixin flex-center {
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+
+@mixin flex-center-column {
+    @include flex-center();
+    flex-direction: column;
 }

@@ -1,8 +1,8 @@
+@import '../../styles/mixins.scss';
+
 .container {
+    @include flex-center();
     position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 
     @media (min-width: 1024px) {
         margin-left: 4rem;

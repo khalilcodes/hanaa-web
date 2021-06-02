@@ -100,14 +100,10 @@ export default function HomepageAnimations() {
     })
     tl.to(`${quoteSvg} #left, ${quoteSvg} #right`, {
       x: gsap.utils.wrap([-bounds, bounds]),
-      duration: 1.3,
-    }).to(
-      "#quote-text",
-      {
+      duration: 1,
+    }).to("#quote-text", {
         opacity: 1,
-      },
-      "0.3"
-    )
+    })
   },[width])
 
   /* contact animations */

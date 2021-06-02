@@ -1,10 +1,10 @@
 @import '../styles/mixins.scss';
 
 .page-header, .return-link {
+    @include flex-center-column();
     position: relative;
     width: 100%;
     height: 4rem;
-    @include content-center();
 }
 
 .return-link {
@@ -42,6 +42,7 @@
     }
 
     font-family: var(--playfair-font);
+
     @include fluid-type(14, 18, 320, 512);
     @include fluid-type(12, 28, 512, 2560);
 
@@ -53,6 +54,7 @@
     h1 {
         text-align: center;
         letter-spacing: 1.4px;
+        font-weight: 300;
     }
 
     h1, .description-wrapper {
