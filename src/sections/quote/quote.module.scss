@@ -5,6 +5,7 @@
     padding: 0 1.8rem;
     background: var(--theme-gradient);
     height: 60vh;
+    height: calc(var(--quote-height) * 60);
     margin-top: 2rem;
 
     .quote-wrapper {

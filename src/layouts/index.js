@@ -13,6 +13,7 @@ import { Header, Footer, Grid } from '../components'
 import { PageTransitions } from '../animations'
 // import SmoothScroll from './smoothscroll/smoothscroll'
 import useWindowSize from "../hooks/useWindowSize"
+import { useMediaQuery } from '@material-ui/core'
 
 import './layout.scss'
 
@@ -28,17 +29,40 @@ const Layout = ({ children, location }) => {
   `)
 
   const { height } = useWindowSize()
+  const matches = useMediaQuery('(min-width: 1024px)')
+
+  function setproperties(values) {
+    for (var key in values) {
+      document.documentElement.style.setProperty(key, values[key] + "px")
+    }
+  }
 
   useEffect(() => {
       var header = document.querySelector("header").getBoundingClientRect().height
       var footer = document.querySelector("footer")
       var bottomCredits = footer.lastChild.lastChild.getBoundingClientRect().height
       let vh = (height * 0.01)
-  
-      document.documentElement.style.setProperty('--vh', `${vh}px`)
-      document.documentElement.style.setProperty('--header', `${header}px`)
-      document.documentElement.style.setProperty('--footer', `${bottomCredits}px`)
+
+      setproperties({
+        "--vh": vh,
+        "--header": header,
+        "--footer": bottomCredits,
+      })
   },[height])
+
+  useEffect(() => {
+    function handleHeight() {
+      setproperties({
+        "--banner-height": window.innerHeight / 100,
+        "--quote-height": window.innerHeight / 100
+      })
+    }
+    handleHeight()
+    if(matches) {
+      window.addEventListener('resize', () => handleHeight())
+      return () => window.removeEventListener('resize', () => handleHeight())
+    }
+  },[matches])
 
   return (
     <PageTransitions location={location}>
