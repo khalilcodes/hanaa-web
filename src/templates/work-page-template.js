@@ -18,9 +18,9 @@ import {
 const WorkPageTemplate = ({ data }) => {
   const {
     title,
-    description: { description },
+    description,
     images,
-  } = data.contentfulWorks
+  } = data.contentfulWorks || null
 
   const matches = useMediaQuery("(min-width: 968px)")
     
@@ -37,9 +37,11 @@ const WorkPageTemplate = ({ data }) => {
       </button>
       <Section heading={title} className={container} id="work-section">
         <span className={line} />
-        <div className={descriptionWrapper}>
-          <p>{description}</p>
-        </div>
+        {description && (
+          <div className={descriptionWrapper}>
+            <p>{description.description}</p>
+          </div>
+        )}
         <div className={imagesContainer}>
           {images.map(({ id, title, gatsbyImageData }) => (
             <GatsbyImage
